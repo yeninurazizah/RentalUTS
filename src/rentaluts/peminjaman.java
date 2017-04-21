@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Date; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,8 +25,10 @@ public class peminjaman extends javax.swing.JFrame {
     /**
      * Creates new form peminjaman
      */
-    public peminjaman() {
+    public peminjaman(String user) {
         initComponents();
+        
+        nm.setText(user);
     }
 
     /**
@@ -55,8 +57,8 @@ public class peminjaman extends javax.swing.JFrame {
         cl = new javax.swing.JButton();
         del = new javax.swing.JButton();
         pr = new javax.swing.JButton();
-        pin = new com.toedter.calendar.JDateChooser();
-        kem = new com.toedter.calendar.JDateChooser();
+        pinjam = new com.toedter.calendar.JDateChooser();
+        kembali = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -65,6 +67,11 @@ public class peminjaman extends javax.swing.JFrame {
         hrg = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         sv = new javax.swing.JButton();
+        dcTglPinjam = new com.toedter.calendar.JDateChooser();
+        dcTglKembali = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        search = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -82,7 +89,7 @@ public class peminjaman extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(618, Short.MAX_VALUE))
+                .addContainerGap(688, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +99,7 @@ public class peminjaman extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 60));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 60));
 
         labelnama.setText("Nama Peminjam");
         getContentPane().add(labelnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
@@ -104,15 +111,16 @@ public class peminjaman extends javax.swing.JFrame {
         getContentPane().add(labelstruk, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         labelpolisi.setText("Nomor Polisi");
-        getContentPane().add(labelpolisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, -1));
+        getContentPane().add(labelpolisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         hr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hrActionPerformed(evt);
             }
         });
-        getContentPane().add(hr, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 70, -1));
+        getContentPane().add(hr, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 70, -1));
 
+        nm.setEnabled(false);
         nm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nmActionPerformed(evt);
@@ -128,10 +136,10 @@ public class peminjaman extends javax.swing.JFrame {
         getContentPane().add(nstruk, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 170, 30));
 
         jLabel1.setText("Tanggal Pinjam");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         jLabel2.setText("Tanggal Kembali");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
 
         rf.setText("Refresh");
         rf.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +147,7 @@ public class peminjaman extends javax.swing.JFrame {
                 rfActionPerformed(evt);
             }
         });
-        getContentPane().add(rf, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 90, -1));
+        getContentPane().add(rf, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 90, -1));
 
         cl.setText("Clear");
         cl.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +155,7 @@ public class peminjaman extends javax.swing.JFrame {
                 clActionPerformed(evt);
             }
         });
-        getContentPane().add(cl, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 150, 90, -1));
+        getContentPane().add(cl, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 90, -1));
 
         del.setText("Delete");
         del.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +163,7 @@ public class peminjaman extends javax.swing.JFrame {
                 delActionPerformed(evt);
             }
         });
-        getContentPane().add(del, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 90, -1));
+        getContentPane().add(del, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 90, -1));
 
         pr.setText("Print");
         pr.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +171,9 @@ public class peminjaman extends javax.swing.JFrame {
                 prActionPerformed(evt);
             }
         });
-        getContentPane().add(pr, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 90, -1));
-        getContentPane().add(pin, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, -1));
-        getContentPane().add(kem, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 170, -1));
+        getContentPane().add(pr, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 90, -1));
+        getContentPane().add(pinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 170, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 170, -1));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,11 +196,11 @@ public class peminjaman extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblData);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 840, 240));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 920, 240));
 
         jLabel3.setText("Jumlah Hari");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
-        getContentPane().add(npolisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 170, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
+        getContentPane().add(npolisi, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 170, -1));
 
         to.setText("Total");
         to.addActionListener(new java.awt.event.ActionListener() {
@@ -200,17 +208,17 @@ public class peminjaman extends javax.swing.JFrame {
                 toActionPerformed(evt);
             }
         });
-        getContentPane().add(to, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 80, -1));
+        getContentPane().add(to, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 80, -1));
 
         hrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hrgActionPerformed(evt);
             }
         });
-        getContentPane().add(hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 170, -1));
+        getContentPane().add(hrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 170, -1));
 
         jLabel5.setText("Harga");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
 
         sv.setText("Save");
         sv.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +226,23 @@ public class peminjaman extends javax.swing.JFrame {
                 svActionPerformed(evt);
             }
         });
-        getContentPane().add(sv, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 90, -1));
+        getContentPane().add(sv, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 90, -1));
+        getContentPane().add(dcTglPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, -1, -1));
+        getContentPane().add(dcTglKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, -1, -1));
+
+        jLabel6.setText("Tanggal Pinjam");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, -1, -1));
+
+        jLabel7.setText("Tanggal Kembali");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, -1, -1));
+
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, 90, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,17 +262,18 @@ public class peminjaman extends javax.swing.JFrame {
         alm.setText("");
         nstruk.setText("");
         npolisi.setText("");
-        pin.setDate(null);
-        kem.setDate(null);
+        pinjam.setDate(null);
+        kembali.setDate(null);
         hr.setText("");
+        hrg.setText("");
     }//GEN-LAST:event_clActionPerformed
 
     private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
         // TODO add your handling code here:
         int baris = tblData.getSelectedRow();
         if(baris!=-1){
-            String Nama = tblData.getValueAt(baris,0).toString();
-            String SQL = "DELETE FROM tb_rental WHERE NIS='"+Nama+"'";
+            String Nostruk = tblData.getValueAt(baris,2).toString();
+            String SQL = "DELETE FROM `tb_rental` WHERE nostruk='"+Nostruk+"'";
             int status = KoneksiDB.execute(SQL);
             if(status==1){
                 JOptionPane.showMessageDialog(this, "Data berhasil dihapus","Suskes",JOptionPane.INFORMATION_MESSAGE);
@@ -265,8 +290,8 @@ public class peminjaman extends javax.swing.JFrame {
 
     private void prActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prActionPerformed
         // TODO add your handling code here:
-        MessageFormat header = new MessageFormat("Halo");
-        MessageFormat footer = new MessageFormat("tes");
+        MessageFormat header = new MessageFormat("Ya gini hasilnya :3 ");
+        MessageFormat footer = new MessageFormat("Page {0,number,inteer}");
         try{
             tblData.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, null, true, null);           
         }catch (java.awt.print.PrinterException e){
@@ -289,26 +314,24 @@ public class peminjaman extends javax.swing.JFrame {
     private void svActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_svActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String tanggal = dateFormat.format(
-                pin.getDate());
+        String pinjamm = dateFormat.format(pinjam.getDate());
+        String kembalii = dateFormat.format(kembali.getDate());
         if( "".equals(nm.getText())||
             "".equals(alm.getText())||
             "".equals(nstruk.getText())||
             "".equals(npolisi.getText())||
-            "".equals(pin.getDate())||
-            "".equals(kem.getDate())||
             "".equals(hr.getText()))
         {
             JOptionPane.showMessageDialog(this, "Harap Lengkapi Data","Error", JOptionPane.WARNING_MESSAGE);
         }else
         {
-            String SQL = "INSERT INTO tb_rental (nama, alamat, nostruk, nopol, pinjam, kembali, harga)"
+            String SQL = "INSERT INTO tb_rental(nama, alamat, nostruk, nopol, pinjam, kembali, harga)"
                     + "VALUES('"+nm.getText()
                     +"','"+alm.getText()
                     +"','"+nstruk.getText()
                     +"','"+npolisi.getText()
-                    +"','"+pin.getDate()
-                    + "'"+kem.getDate()                   
+                    +"','"+pinjamm
+                    +"','"+kembalii
                     +"','"+hr.getText()+"')";
             int status = KoneksiDB.execute(SQL);
             if(status == 1)
@@ -326,50 +349,35 @@ public class peminjaman extends javax.swing.JFrame {
        
     }//GEN-LAST:event_hrgActionPerformed
 
-     public void selectData() {
-        String kolom[] = {"nama","alamat","nostruk","nopol","pinjam","kembali","harga"};
-        DefaultTableModel dtm = new DefaultTableModel(null,kolom);
-        String SQL = "SELECT * FROM tb_rental";
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        String kolom[] = {"nostruk","nama","alamat","nopol","pinjam","kembali", "harga"};
+        DefaultTableModel dtm = new DefaultTableModel(null, kolom);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String tglpinjam = dateFormat.format(dcTglPinjam.getDate());
+        String tglkembali = dateFormat.format(dcTglKembali.getDate());
+ 
+        String SQL = "SELECT * FROM tb_rental WHERE pinjam='"+tglpinjam+"' AND kembali='"+tglkembali+"'";
         ResultSet rs = KoneksiDB.executeQuery(SQL);
-        try{
+        try {
             while(rs.next()){
-                String Nama = rs.getString(1);
-                String Alamat = rs.getString(2);
-                String NoStruk = rs.getString(3);
-                String NoPolisi = rs.getString(4);
-                String Pinjam = rs.getString(5);
-                String Kembali = rs.getString(6);
-                String Harga = rs.getString(7);
-                String data[] = {Nama,Alamat,NoStruk,NoPolisi,Pinjam,Kembali,Harga};
+                String no_struk = rs.getString(1);
+                String nama = rs.getString(2);
+                String alamat = rs.getString(3);
+                String no_pol = rs.getString(4);
+                String tgl_pinjam = rs.getString(5);
+                String tgl_kembali = rs.getString(6);
+                String harga = rs.getString(7);
+                String data[] = {no_struk, nama, alamat, no_pol, tgl_pinjam, tgl_kembali, harga};
                 dtm.addRow(data);
             }
-        }catch(SQLException ex){
+        } catch(SQLException ex){
             Logger.getLogger(peminjaman.class.getName()).log(Level.SEVERE, null, ex);
         }
         tblData.setModel(dtm);
-    }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
      
-     public void SetJam(){
-         int baris = tblData.getSelectedRow();
-    if(baris != -1){
-          nm.setText(tblData.getValueAt(baris, 0).toString());
-          alm.setText(tblData.getValueAt(baris, 1).toString());
-          nstruk.setText(tblData.getValueAt(baris, 2).toString());
-          hr.setText(tblData.getValueAt(baris, 3).toString());
-          SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-          Date dateFormat = null;
-            try { 
-                dateFormat = date.parse(tblData.getValueAt(baris, 4).toString());
-            } catch (java.text.ParseException ex) {
-                Logger.getLogger(peminjaman.class.getName()).log(Level.SEVERE, null, ex);
-            }
-          
-          pin.setDate(dateFormat);
-          String JKL = tblData.getValueAt(baris, 5).toString();
-        
-          hr.setText(tblData.getValueAt(baris, 6).toString());
-    }
-}
     
     /**
      * @param args the command line arguments
@@ -401,7 +409,8 @@ public class peminjaman extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new peminjaman().setVisible(true);
+                String user = null;
+                new peminjaman(user).setVisible(true);
             }
         });
     }
@@ -409,6 +418,8 @@ public class peminjaman extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alm;
     private javax.swing.JButton cl;
+    private com.toedter.calendar.JDateChooser dcTglKembali;
+    private com.toedter.calendar.JDateChooser dcTglPinjam;
     private javax.swing.JButton del;
     private javax.swing.JTextField hr;
     private javax.swing.JTextField hrg;
@@ -417,10 +428,12 @@ public class peminjaman extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser kem;
+    private com.toedter.calendar.JDateChooser kembali;
     private javax.swing.JLabel labelalamat;
     private javax.swing.JLabel labelnama;
     private javax.swing.JLabel labelpolisi;
@@ -428,11 +441,36 @@ public class peminjaman extends javax.swing.JFrame {
     private javax.swing.JTextField nm;
     private javax.swing.JTextField npolisi;
     private javax.swing.JTextField nstruk;
-    private com.toedter.calendar.JDateChooser pin;
+    private com.toedter.calendar.JDateChooser pinjam;
     private javax.swing.JButton pr;
     private javax.swing.JButton rf;
+    private javax.swing.JButton search;
     private javax.swing.JButton sv;
     private javax.swing.JTable tblData;
     private javax.swing.JButton to;
     // End of variables declaration//GEN-END:variables
+
+
+public void selectData() {
+        String kolom[] = {"nama", "alamat","nostruk", "nopol", "pinjam", "kembali", "harga"};
+        DefaultTableModel dtm = new DefaultTableModel(null,kolom);
+        String SQL = "SELECT * FROM `tb_rental`";
+        ResultSet rs = KoneksiDB.executeQuery(SQL);
+        try{
+            while(rs.next()){
+                String nama = rs.getString(1);
+                String alamat = rs.getString(2);
+                String nostruk = rs.getString(3);
+                String nopol = rs.getString(4);
+                String pinjam = rs.getString(5);
+                String kembali = rs.getString(6);
+                String harga = rs.getString(7);
+                String data[] = {nama, alamat, nostruk, nopol, pinjam, kembali, harga};
+                dtm.addRow(data);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(peminjaman.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tblData.setModel(dtm);
+    }
 }

@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author Yeni
  */
 public class Login extends javax.swing.JFrame {
+    public static String user;
 
     /**
      * Creates new form Login
@@ -35,14 +36,16 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         un = new javax.swing.JTextField();
-        psw = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         si = new javax.swing.JButton();
         su = new javax.swing.JButton();
         ex = new javax.swing.JButton();
+        psw = new javax.swing.JPasswordField();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,13 +62,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 160, -1));
-
-        psw.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswActionPerformed(evt);
-            }
-        });
-        getContentPane().add(psw, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 160, -1));
 
         jLabel3.setText("Form Login");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
@@ -94,16 +90,20 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(ex, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 70, -1));
 
+        psw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswActionPerformed(evt);
+            }
+        });
+        getContentPane().add(psw, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 90, 160, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 240));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void unActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unActionPerformed
-
-    private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswActionPerformed
 
     private void exActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exActionPerformed
     dispose();        // TODO add your handling code here:
@@ -135,8 +135,10 @@ public class Login extends javax.swing.JFrame {
             ps.setString(1, un.getText());
             ps.setString(2, psw.getText());
             ResultSet result = ps.executeQuery();
+
             if(result.next()){
-                new peminjaman().show();
+                String user = un.getText();
+                new peminjaman(user).setVisible(true);
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Salah!");
@@ -147,6 +149,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"gagal");
         }
     }//GEN-LAST:event_siActionPerformed
+
+    private void pswActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,7 +194,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField psw;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField psw;
     private javax.swing.JButton si;
     private javax.swing.JButton su;
     private javax.swing.JTextField un;
